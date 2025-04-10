@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Traffic Status</title>
+  <title>nesKØya</title>
   <style>
     body {
       font-family: sans-serif;
@@ -16,15 +16,15 @@
 </head>
 <body>
 
-  <h1>Traffic Status</h1>
+  <h1>Er det kø?</h1>
   <div class="status">Loading...</div>
   <div class="time"></div>
   <div class="updated"></div>
-  <div class="note">Updated every 5 minutes between 06:30 and 10:00 (Oslo time).</div>
+  <div class="note">Oppdateres hvert femte minutt på ukedager mellom 06:30 og 10:00.</div>
 
   <script>
     async function loadTraffic() {
-      const res = await fetch('/traffic.json');
+      const res = await fetch('/er-det-ko/traffic.json');
       if (!res.ok) {
         document.querySelector('.status').textContent = "❌ Could not load data.";
         return;
@@ -36,13 +36,13 @@
       const updatedEl = document.querySelector('.updated');
 
       if (data.durationMinutes > data.staticMinutes + 2) {
-        statusEl.textContent = "🚨 Traffic congestion on the route!";
+        statusEl.textContent = "🚨 Kø!";
       } else {
-        statusEl.textContent = "✅ No significant congestion.";
+        statusEl.textContent = "✅ Ingen kø";
       }
 
-      timeEl.textContent = `Estimated time: ${data.durationMinutes} min (normal: ${data.staticMinutes} min)`;
-      updatedEl.textContent = `Last updated: ${data.updated}`;
+      timeEl.textContent = `Det tar nå ${data.durationMinutes} fra Kiwi til rundkjøringen)`;
+      updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
     loadTraffic();
