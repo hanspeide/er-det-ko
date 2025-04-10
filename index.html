@@ -18,11 +18,11 @@ body {
   font-size: 2em;
   margin-top: 20px;
 }
-.time, .updated {
+.time {
   font-size: 1.2em;
   margin-top: 10px;
 }
-.note {
+.updated,.note {
   margin-top: 30px;
   font-size: 0.9em;
   color: gray;
@@ -55,7 +55,7 @@ body {
         statusEl.textContent = "🎉 Ingen kø";
       }
 
-      timeEl.textContent = `Det tar nå ${data.durationMinutes} å kjøre fra Kiwi til rundkjøringen`;
+      timeEl.textContent = `Det tar nå ${data.durationMinutes} minutter å kjøre fra Kiwi til rundkjøringen`;
       updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
