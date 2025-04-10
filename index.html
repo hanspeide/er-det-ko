@@ -16,7 +16,6 @@
 </head>
 <body>
 
-  <h1>Er det kø?</h1>
   <div class="status">Loading...</div>
   <div class="time"></div>
   <div class="updated"></div>
@@ -26,7 +25,7 @@
     async function loadTraffic() {
       const res = await fetch('/er-det-ko/traffic.json');
       if (!res.ok) {
-        document.querySelector('.status').textContent = "❌ Could not load data.";
+        document.querySelector('.status').textContent = "😭 Klarte ikke hente data.";
         return;
       }
 
@@ -36,12 +35,12 @@
       const updatedEl = document.querySelector('.updated');
 
       if (data.durationMinutes > data.staticMinutes + 2) {
-        statusEl.textContent = "🚨 Kø!";
+        statusEl.textContent = "🤬 Kø!";
       } else {
-        statusEl.textContent = "✅ Ingen kø";
+        statusEl.textContent = "🎉 Ingen kø";
       }
 
-      timeEl.textContent = `Det tar nå ${data.durationMinutes} fra Kiwi til rundkjøringen)`;
+      timeEl.textContent = `Det tar nå ${data.durationMinutes} å kjøre fra Kiwi til rundkjøringen)`;
       updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
