@@ -27,18 +27,25 @@ body {
   font-size: 0.9em;
   color: gray;
 }
+.coffee-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
   </style>
 </head>
 <body>
 
-  <div class="status">Loading...</div>
+  <div class="status">Henter data...</div>
   <div class="time"></div>
   <div class="updated"></div>
   <div class="note">Oppdateres hvert femte minutt på ukedager mellom 06:00 og 10:00.</div>
 
   <script>
     async function loadTraffic() {
-      const res = await fetch('/er-det-ko/traffic.json');
+      const res = await fetch('/traffic.json');
       if (!res.ok) {
         document.querySelector('.status').textContent = "😭 Klarte ikke hente data.";
         return;
@@ -62,5 +69,16 @@ body {
     loadTraffic();
   </script>
 
+<a 
+  href="https://www.buymeacoffee.com/hpeide" 
+  target="_blank" 
+  rel="noopener"
+  class="coffee-button"
+>
+  <img 
+    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=hpeide&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" 
+    alt="Buy me a coffee"
+  />
+</a>
 </body>
 </html>
