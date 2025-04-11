@@ -88,8 +88,8 @@ body {
       const scaleY = canvas.height / (maxElevation - minElevation || 1);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
 
+      // Draw elevation line
       for (let i = 1; i < data.length; i++) {
         const prev = data[i - 1];
         const curr = data[i];
@@ -105,6 +105,23 @@ body {
         ctx.lineTo(x2, y2);
         ctx.stroke();
       }
+
+      // Add markers for labels
+      ctx.fillStyle = "black";
+      ctx.font = "12px sans-serif";
+      ctx.textAlign = "center";
+
+      data.forEach((point, i) => {
+        if (point.label) {
+          const x = i * scaleX;
+          const y = canvas.height - (point.elevation - minElevation) * scaleY;
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, 2 * Math.PI);
+          ctx.fill();
+
+          ctx.fillText(point.label, x, y - 8);
+        }
+      });
     }
 
     loadPathData();
