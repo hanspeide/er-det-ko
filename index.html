@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>nesKØya</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
 body {
   font-family: sans-serif;
@@ -42,7 +43,7 @@ body {
 <body>
 
   <div class="status">Henter data...</div>
-  <canvas id="elevationChart" width="600" height="200" style="margin-top: 40px;"></canvas>
+  <canvas id="elevationChart" width="600" height="250" style="margin-top: 40px;"></canvas>
   <div class="time"></div>
   <div class="updated"></div>
   <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
@@ -71,63 +72,68 @@ body {
     }
 
     loadTraffic();
-
     async function loadPathData() {
-      const canvas = document.getElementById("elevationChart");
-      const ctx = canvas.getContext("2d");
-      
-      const paddingTop = 20;
-      const paddingX = 10; // pixels on both left and right
-      const usableWidth = canvas.width - paddingX * 2;
+  const res = await fetch('/pathData.json');
+  if (!res.ok) return;
 
-      const res = await fetch('/pathData.json');
-      if (!res.ok) return;
+  const data = await res.json();
 
-      const data = await res.json();
+  const labels = data.map(p => `${p.distance} m`);
+  const elevations = data.map(p => p.elevation);
 
-      const elevations = data.map(d => d.elevation);
-      const minElevation = Math.min(...elevations);
-      const maxElevation = Math.max(...elevations);
+  // Create a custom color array for segments
+  const segmentColors = data.map((point, i) =>
+    point.congested ? 'rgba(255,0,0,1)' : 'rgba(0,128,0,1)'
+  );
 
-      const scaleX = usableWidth / (data.length - 1);
-      const scaleY = (canvas.height - paddingTop) / (maxElevation - minElevation || 1);
+  const ctx = document.getElementById('elevationChart').getContext('2d');
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw elevation line
-      for (let i = 1; i < data.length; i++) {
-        const prev = data[i - 1];
-        const curr = data[i];
-
-        const x1 = paddingX + (i - 1) * scaleX;
-        const y1 = canvas.height - (prev.elevation - minElevation) * scaleY;
-        const x2 = paddingX + i * scaleX;
-        const y2 = canvas.height - (curr.elevation - minElevation) * scaleY;
-
-        ctx.strokeStyle = curr.congested ? "red" : "green";
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-      }
-
-      // Add markers for labels
-      ctx.fillStyle = "black";
-      ctx.font = "12px sans-serif";
-      ctx.textAlign = "center";
-
-      data.forEach((point, i) => {
-        if (point.label) {
-          const x = paddingX + i * scaleX;
-          const y = canvas.height - (point.elevation - minElevation) * scaleY;
-          ctx.beginPath();
-          ctx.arc(x, y, 4, 0, 2 * Math.PI);
-          ctx.fill();
-
-          ctx.fillText(point.label, x, y - 8);
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Høydeprofil',
+        data: elevations,
+        segment: {
+          borderColor: ctx => segmentColors[ctx.p1DataIndex] || 'gray'
+        },
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Avstand'
+          },
+          ticks: {
+            maxTicksLimit: 10
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Høyde (m)'
+          }
         }
-      });
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `Høyde: ${ctx.parsed.y.toFixed(1)} m`
+          }
+        }
+      }
     }
+  });
+}
 
     loadPathData();
   </script>
