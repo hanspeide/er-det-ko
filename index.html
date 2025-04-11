@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>nesKØya</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
   <style>
-body {
-  font-family: sans-serif;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.status {
-  font-size: 2em;
-  margin-top: 20px;
-}
-.time {
-  font-size: 1.2em;
-  margin-top: 10px;
-}
-.updated,.note {
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: gray;
-}
-.coffee-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
+    body {
+      font-family: sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .status {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+
+    .time {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    .updated,
+    .note {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: gray;
+    }
+
+    .coffee-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
   </style>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 </head>
+
 <body>
 
   <div class="status">Henter data...</div>
@@ -72,82 +80,79 @@ body {
     }
 
     loadTraffic();
-    async function loadPathData() {
-  const res = await fetch('/pathData.json');
-  if (!res.ok) return;
+    aasync function loadPathData() {
+      const res = await fetch('/pathData.json');
+      if (!res.ok) return;
 
-  const data = await res.json();
+      const data = await res.json();
 
-  const labels = data.map(p => `${p.distance} m`);
-  const elevations = data.map(p => p.elevation);
+      const elevations = data.map(p => p.elevation);
+      const segmentColors = data.map((p, i) =>
+        p.congested ? 'rgba(255,0,0,1)' : 'rgba(0,128,0,1)'
+      );
 
-  // Create a custom color array for segments
-  const segmentColors = data.map((point, i) =>
-    point.congested ? 'rgba(255,0,0,1)' : 'rgba(0,128,0,1)'
-  );
+      const ctx = document.getElementById('elevationChart').getContext('2d');
 
-  const ctx = document.getElementById('elevationChart').getContext('2d');
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Høydeprofil',
-        data: elevations,
-        segment: {
-          borderColor: ctx => segmentColors[ctx.p1DataIndex] || 'gray'
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.map((_, i) => i),
+          datasets: [{
+            label: 'Høydeprofil',
+            data: elevations,
+            segment: {
+              borderColor: ctx => segmentColors[ctx.p1DataIndex] || 'gray'
+            },
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.3
+          }]
         },
-        borderWidth: 2,
-        pointRadius: 0,
-        fill: false,
-        tension: 0.3
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Avstand'
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `Høyde: ${ctx.parsed.y.toFixed(1)} m`
+              }
+            },
+            annotation: {
+              annotations: data
+                .map((point, i) => point.label ? ({
+                  type: 'point',
+                  xValue: i,
+                  yValue: point.elevation,
+                  backgroundColor: 'black',
+                  radius: 5,
+                  label: {
+                    enabled: true,
+                    content: point.label,
+                    position: 'start',
+                    yAdjust: -10
+                  }
+                }) : null)
+                .filter(Boolean)
+            }
           },
-          ticks: {
-            maxTicksLimit: 10
+          scales: {
+            x: { display: false },
+            y: { display: false }
           }
         },
-        y: {
-          title: {
-            display: true,
-            text: 'Høyde (m)'
-          }
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => `Høyde: ${ctx.parsed.y.toFixed(1)} m`
-          }
-        }
-      }
+        plugins: [Chart.registry.getPlugin('annotation')]
+      });
     }
-  });
-}
 
     loadPathData();
   </script>
 
-<a 
-  href="https://www.buymeacoffee.com/hpeide" 
-  target="_blank" 
-  rel="noopener"
-  class="coffee-button"
->
-  <img 
-    src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=hpeide&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" 
-    alt="Buy me a coffee"
-  />
-</a>
+  <a href="https://www.buymeacoffee.com/hpeide" target="_blank" rel="noopener" class="coffee-button">
+    <img
+      src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=hpeide&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+      alt="Buy me a coffee" />
+  </a>
 </body>
+
 </html>
