@@ -80,7 +80,7 @@
     }
 
     loadTraffic();
-    aasync function loadPathData() {
+    async function loadPathData() {
       const res = await fetch('/pathData.json');
       if (!res.ok) return;
 
