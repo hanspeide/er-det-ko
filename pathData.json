@@ -2,7 +2,8 @@
   {
     "distance": 0,
     "elevation": 15.55974197387695,
-    "congested": false
+    "congested": false,
+    "label": "Kiwi"
   },
   {
     "distance": 1,
@@ -197,6 +198,7 @@
   {
     "distance": 39,
     "elevation": 8.087143898010254,
-    "congested": false
+    "congested": false,
+    "label": "Rundkjøringen"
   }
 ]
