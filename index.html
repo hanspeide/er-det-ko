@@ -42,9 +42,10 @@ body {
 <body>
 
   <div class="status">Henter data...</div>
+  <canvas id="elevationChart" width="600" height="200" style="margin-top: 40px;"></canvas>
   <div class="time"></div>
   <div class="updated"></div>
-  <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 06:00 til 10:00</div>
+  <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
 
   <script>
     async function loadTraffic() {
@@ -70,6 +71,43 @@ body {
     }
 
     loadTraffic();
+
+    async function loadPathData() {
+      const res = await fetch('/pathData.json');
+      if (!res.ok) return;
+
+      const data = await res.json();
+      const canvas = document.getElementById("elevationChart");
+      const ctx = canvas.getContext("2d");
+
+      const elevations = data.map(d => d.elevation);
+      const minElevation = Math.min(...elevations);
+      const maxElevation = Math.max(...elevations);
+
+      const scaleX = canvas.width / (data.length - 1);
+      const scaleY = canvas.height / (maxElevation - minElevation || 1);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+
+      for (let i = 1; i < data.length; i++) {
+        const prev = data[i - 1];
+        const curr = data[i];
+
+        const x1 = (i - 1) * scaleX;
+        const y1 = canvas.height - (prev.elevation - minElevation) * scaleY;
+        const x2 = i * scaleX;
+        const y2 = canvas.height - (curr.elevation - minElevation) * scaleY;
+
+        ctx.strokeStyle = curr.congested ? "red" : "green";
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+    }
+
+    loadPathData();
   </script>
 
 <a 
