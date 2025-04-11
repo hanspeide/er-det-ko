@@ -38,6 +38,7 @@
       margin-top: 40px;
       width: 100%;
       max-width: 400px;
+      max-height: 200px;
     }
 
     .coffee-button {
@@ -71,10 +72,18 @@
       }
 
       const data = await res.json();
-      document.querySelector('.status').textContent = data.durationMinutes > data.staticMinutes + 2
-        ? "🤬 Kø!" : "🏎️ Ingen kø";
-      document.querySelector('.time').textContent = `${data.durationMinutes} minutter fra Kiwi til rundkjøringen`;
-      document.querySelector('.updated').textContent = `Sist oppdatert: ${data.updated}`;
+      const statusEl = document.querySelector('.status');
+      const timeEl = document.querySelector('.time');
+      const updatedEl = document.querySelector('.updated');
+
+      if (data.durationMinutes > data.staticMinutes + 2) {
+        statusEl.textContent = "🤬 Kø!";
+      } else {
+        statusEl.textContent = "🏎️ Ingen kø";
+      }
+
+      timeEl.textContent = `${data.durationMinutes} minutter fra Kiwi til rundkjøringen`;
+      updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
     async function loadPathData() {
@@ -84,21 +93,8 @@
       const data = await res.json();
       const elevations = data.map(p => p.elevation);
       const segmentColors = data.map(p => p.congested ? 'rgba(255,0,0,1)' : 'rgba(0,128,0,1)');
-      const distances = data.map(p => p.distance);
 
-      const minElevation = Math.min(...elevations);
-      const maxElevation = Math.max(...elevations);
-      const elevationRange = maxElevation - minElevation;
-      const totalDistance = distances[distances.length - 1] || 1;
-
-      const scaleFactor = 10000; // tweak if needed
-      const baseHeight = 80;
-      
-      const canvas = document.getElementById('elevationChart');      
-      const dynamicHeight = baseHeight + (elevationRange / totalDistance) * scaleFactor;
-      canvas.height = Math.min(Math.max(dynamicHeight, baseHeight), 200);
-
-      const ctx = canvas.getContext('2d');
+      const ctx = document.getElementById('elevationChart').getContext('2d');
 
       new Chart(ctx, {
         type: 'line',
