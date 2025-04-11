@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>nesKØya</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1"></script>
   <style>
     body {
       font-family: sans-serif;
@@ -90,7 +90,7 @@
       const segmentColors = data.map(p => p.congested ? 'rgba(255,0,0,1)' : 'rgba(0,128,0,1)');
 
       const ctx = document.getElementById('elevationChart').getContext('2d');
-
+      Chart.register(window['chartjs-plugin-annotation']);
       const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -116,6 +116,12 @@
               right: 20
             }
           },
+          elements: {
+            point: {
+              pointStyle: 'circle'
+            }
+          },
+          clip: false,
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -134,18 +140,19 @@
                   backgroundColor: 'black',
                   radius: 3,
                   label: {
-                    enabled: true,
-                    display: true,
-                    content: point.label,
-                    position: point.label === 'Kiwi' ? 'right' : 'left',
-                    xAdjust: point.label === 'Kiwi' ? 10 : -10,
-                    yAdjust: -6,
-                    color: '#000',
-                    font: {
-                      size: 11,
-                      weight: 'normal'
-                    }
-                  }
+  enabled: true,
+  content: point.label,
+  position: point.label === 'Kiwi' ? 'right' : 'left',
+  xAdjust: point.label === 'Kiwi' ? 10 : -10,
+  yAdjust: -6,
+  display: true,
+  backgroundColor: 'rgba(255,255,255,0.8)',
+  color: '#000',
+  font: {
+    size: 11,
+    weight: 'normal'
+  }
+}
                 };
               }).filter(Boolean)
             }
