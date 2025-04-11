@@ -73,6 +73,9 @@ body {
     loadTraffic();
 
     async function loadPathData() {
+      const canvas = document.getElementById("elevationChart");
+      const ctx = canvas.getContext("2d");
+      
       const paddingTop = 20;
       const paddingX = 10; // pixels on both left and right
       const usableWidth = canvas.width - paddingX * 2;
@@ -81,8 +84,6 @@ body {
       if (!res.ok) return;
 
       const data = await res.json();
-      const canvas = document.getElementById("elevationChart");
-      const ctx = canvas.getContext("2d");
 
       const elevations = data.map(d => d.elevation);
       const minElevation = Math.min(...elevations);
