@@ -73,6 +73,10 @@ body {
     loadTraffic();
 
     async function loadPathData() {
+      const paddingTop = 20;
+      const paddingX = 10; // pixels on both left and right
+      const usableWidth = canvas.width - paddingX * 2;
+
       const res = await fetch('/pathData.json');
       if (!res.ok) return;
 
@@ -84,8 +88,8 @@ body {
       const minElevation = Math.min(...elevations);
       const maxElevation = Math.max(...elevations);
 
-      const scaleX = canvas.width / (data.length - 1);
-      const scaleY = canvas.height / (maxElevation - minElevation || 1);
+      const scaleX = usableWidth / (data.length - 1);
+      const scaleY = (canvas.height - paddingTop) / (maxElevation - minElevation || 1);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -94,9 +98,9 @@ body {
         const prev = data[i - 1];
         const curr = data[i];
 
-        const x1 = (i - 1) * scaleX;
+        const x1 = paddingX + (i - 1) * scaleX;
         const y1 = canvas.height - (prev.elevation - minElevation) * scaleY;
-        const x2 = i * scaleX;
+        const x2 = paddingX + i * scaleX;
         const y2 = canvas.height - (curr.elevation - minElevation) * scaleY;
 
         ctx.strokeStyle = curr.congested ? "red" : "green";
@@ -113,7 +117,7 @@ body {
 
       data.forEach((point, i) => {
         if (point.label) {
-          const x = i * scaleX;
+          const x = paddingX + i * scaleX;
           const y = canvas.height - (point.elevation - minElevation) * scaleY;
           ctx.beginPath();
           ctx.arc(x, y, 4, 0, 2 * Math.PI);
