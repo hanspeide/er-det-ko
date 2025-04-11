@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>nesKØya</title>
@@ -35,6 +34,13 @@
       color: gray;
     }
 
+    canvas {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 200px;
+    }
+
     .coffee-button {
       position: fixed;
       bottom: 20px;
@@ -47,17 +53,17 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 </head>
-
 <body>
 
   <div class="status">Henter data...</div>
   <div class="time"></div>
-  <canvas id="elevationChart"
-    style="margin-top: 40px; width: 100%; max-width: 400px; max-height: 200px; padding: 0 20px;"></canvas>
+  <canvas id="elevationChart"></canvas>
   <div class="updated"></div>
   <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
 
   <script>
+    Chart.register(window['chartjs-plugin-annotation']);
+
     async function loadTraffic() {
       const res = await fetch('/traffic.json');
       if (!res.ok) {
@@ -80,7 +86,6 @@
       updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
-    loadTraffic();
     async function loadPathData() {
       const res = await fetch('/pathData.json');
       if (!res.ok) return;
@@ -90,13 +95,12 @@
       const segmentColors = data.map(p => p.congested ? 'rgba(255,0,0,1)' : 'rgba(0,128,0,1)');
 
       const ctx = document.getElementById('elevationChart').getContext('2d');
-      Chart.register(window['chartjs-plugin-annotation']);
-      const chart = new Chart(ctx, {
+
+      new Chart(ctx, {
         type: 'line',
         data: {
           labels: data.map((_, i) => i),
           datasets: [{
-            label: 'Høydeprofil',
             data: elevations,
             segment: {
               borderColor: ctx => segmentColors[ctx.p1DataIndex] || 'gray'
@@ -111,48 +115,45 @@
         options: {
           responsive: true,
           layout: {
-            padding: {
-              left: 20,
-              right: 20
-            }
-          },
-          elements: {
-            point: {
-              pointStyle: 'circle'
-            }
+            padding: { left: 20, right: 20 }
           },
           clip: false,
+          elements: {
+            point: { pointStyle: 'circle' }
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
               callbacks: {
-                label: (ctx) => `Høyde: ${ctx.parsed.y.toFixed(1)} m`
+                label: ctx => `Høyde: ${ctx.parsed.y.toFixed(1)} m`
               }
             },
             annotation: {
               annotations: data.map((point, i) => {
                 if (!point.label) return null;
-
                 return {
-                  type: 'point',
+                  type: 'label',
                   xValue: i,
                   yValue: point.elevation,
-                  backgroundColor: 'black',
-                  radius: 3,
-                  label: {
-  enabled: true,
-  content: point.label,
-  position: point.label === 'Kiwi' ? 'right' : 'left',
-  xAdjust: point.label === 'Kiwi' ? 10 : -10,
-  yAdjust: -6,
-  display: true,
-  backgroundColor: 'rgba(255,255,255,0.8)',
-  color: '#000',
-  font: {
-    size: 11,
-    weight: 'normal'
-  }
-}
+                  content: point.label,
+                  backgroundColor: 'rgba(255,255,255,0.9)',
+                  borderColor: '#000',
+                  borderWidth: 1,
+                  font: {
+                    size: 11,
+                    weight: 'bold'
+                  },
+                  color: '#000',
+                  xAdjust: point.label === 'Kiwi' ? 10 : -10,
+                  yAdjust: -10,
+                  position: {
+                    x: 'center',
+                    y: 'center'
+                  },
+                  callout: {
+                    display: true,
+                    side: point.label === 'Kiwi' ? 'right' : 'left'
+                  }
                 };
               }).filter(Boolean)
             }
@@ -161,12 +162,11 @@
             x: { display: false },
             y: { display: false }
           }
-        },
-        plugins: [Chart.registry.getPlugin('annotation')]
+        }
       });
     }
 
-
+    loadTraffic();
     loadPathData();
   </script>
 
@@ -175,6 +175,6 @@
       src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=hpeide&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
       alt="Buy me a coffee" />
   </a>
-</body>
 
+</body>
 </html>
