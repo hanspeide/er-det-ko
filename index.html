@@ -51,7 +51,7 @@
 <body>
 
   <div class="status">Henter data...</div>
-  <canvas id="elevationChart" width="600" height="250" style="margin-top: 40px;"></canvas>
+  <canvas id="elevationChart" style="margin-top: 40px; width: 100%; max-width: 400px; height: 200px;"></canvas>
   <div class="time"></div>
   <div class="updated"></div>
   <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
@@ -128,9 +128,15 @@
                   radius: 5,
                   label: {
                     enabled: true,
+                    display: true,
                     content: point.label,
                     position: 'start',
-                    yAdjust: -10
+                    yAdjust: -20,
+                    color: '#000',
+                    font: {
+                      weight: 'bold',
+                      size: 12
+                    }
                   }
                 }) : null)
                 .filter(Boolean)
