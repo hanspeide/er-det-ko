@@ -62,10 +62,10 @@ body {
       if (data.durationMinutes > data.staticMinutes + 2) {
         statusEl.textContent = "🤬 Kø!";
       } else {
-        statusEl.textContent = "🎉 Ingen kø";
+        statusEl.textContent = "🏎️ Ingen kø";
       }
 
-      timeEl.textContent = `Det tar nå ${data.durationMinutes} minutter å kjøre fra Kiwi til rundkjøringen`;
+      timeEl.textContent = `Det tar ${data.durationMinutes} minutter fra Kiwi til rundkjøringen`;
       updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
