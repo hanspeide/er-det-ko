@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>nesKØya</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .status {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+
+    .time {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    .updated,
+    .note {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: gray;
+    }
+
+    canvas {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 200px;
+    }
+
+    .coffee-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+  </style>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+
+<body>
+
+  <div class="status">Henter data...</div>
+  <div class="time"></div>
+  <canvas id="elevationChart" style="margin-top: 40px; width: 100%; max-width: 400px; height: 80px;"></canvas>
+  <div class="updated"></div>
+  <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
+
+  <script>
+    async function loadTraffic() {
+      const res = await fetch('/traffic.json');
+      if (!res.ok) {
+        document.querySelector('.status').textContent = "😭 Klarte ikke hente data.";
+        return;
+      }
+
+      const data = await res.json();
+      const statusEl = document.querySelector('.status');
+      const timeEl = document.querySelector('.time');
+      const updatedEl = document.querySelector('.updated');
+
+      if (data.durationMinutes > data.staticMinutes + 2) {
+        statusEl.textContent = "🤬 Kø!";
+      } else {
+        statusEl.textContent = "🏎️ Ingen kø";
+      }
+
+      timeEl.textContent = `${data.durationMinutes} minutter fra Kiwi til rundkjøringen`;
+      updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
+    }
+
+    async function loadPathData() {
+      const res = await fetch('/pathData.json');
+      if (!res.ok) return;
+
+      const data = await res.json();
+      const ctx = document.getElementById('elevationChart').getContext('2d');
+
+      const flatLine = data.map(() => 1);
+      const segmentColors = data.map(p => p.congested ? 'red' : 'green');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.map((_, i) => i),
+          datasets: [{
+            data: flatLine,
+            borderWidth: 6,
+            pointRadius: 0,
+            fill: false,
+            tension: 0,
+            segment: {
+              borderColor: ctx => segmentColors[ctx.p1DataIndex] || 'gray'
+            }
+          }]
+        },
+        options: {
+          responsive: true,
+          layout: {
+            padding: { left: 20, right: 20 }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false },
+            annotation: {
+              annotations: [
+                {
+                  type: 'label',
+                  xValue: 0,
+                  yValue: 1,
+                  content: 'Kiwi',
+                  font: {
+                    size: 11,
+                    weight: 'bold'
+                  },
+                  color: '#000',
+                  xAdjust: 10,
+                  yAdjust: -15,
+                  callout: { display: true, side: 'right' }
+                },
+                {
+                  type: 'label',
+                  xValue: data.length - 1,
+                  yValue: 1,
+                  content: 'Rundkjøringen',
+                  font: {
+                    size: 11,
+                    weight: 'bold'
+                  },
+                  color: '#000',
+                  xAdjust: -10,
+                  yAdjust: -15,
+                  callout: { display: true, side: 'left' }
+                }
+              ]
+            }
+          },
+          scales: {
+            x: { display: false },
+            y: {
+              display: false,
+              min: 0.8,
+              max: 1.2
+            }
+          }
+        }
+      });
+    }
+
+    // ✅ Register the plugin and kick off loading
+    Chart.register(window['chartjs-plugin-annotation']);
+    loadTraffic();
+    loadPathData();
+  </script>
+
+  <a href="https://www.buymeacoffee.com/hpeide" target="_blank" rel="noopener" class="coffee-button">
+    <img
+      src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&name=bmc-button&slug=hpeide&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+      alt="Buy me a coffee" />
+  </a>
+
+</body>
+
+</html>
