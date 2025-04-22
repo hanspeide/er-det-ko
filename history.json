@@ -1353,5 +1353,10 @@
     "timestamp": "2025-04-22 09:02",
     "durationMinutes": 7,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-04-22 09:04",
+    "durationMinutes": 7,
+    "staticMinutes": 2
   }
 ]
