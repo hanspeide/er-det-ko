@@ -2423,5 +2423,10 @@
     "timestamp": "2025-04-23 07:56",
     "durationMinutes": 25,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-04-23 07:58",
+    "durationMinutes": 26,
+    "staticMinutes": 2
   }
 ]
