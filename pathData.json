@@ -1,7 +1,7 @@
 [
   {
     "distance": 0,
-    "elevation": 15.55974197387695,
+    "elevation": 0,
     "lat": 59.87042,
     "lng": 10.51669,
     "congested": false,
@@ -9,273 +9,273 @@
   },
   {
     "distance": 1,
-    "elevation": 15.67967987060547,
+    "elevation": 0,
     "lat": 59.87072,
     "lng": 10.51654,
     "congested": false
   },
   {
     "distance": 2,
-    "elevation": 16.32146072387695,
+    "elevation": 0,
     "lat": 59.871,
     "lng": 10.5165,
     "congested": false
   },
   {
     "distance": 3,
-    "elevation": 14.28662490844727,
+    "elevation": 0,
     "lat": 59.87153,
     "lng": 10.51657,
     "congested": false
   },
   {
     "distance": 4,
-    "elevation": 12.91881942749023,
+    "elevation": 0,
     "lat": 59.87182,
     "lng": 10.51653,
     "congested": false
   },
   {
     "distance": 5,
-    "elevation": 10.72456741333008,
+    "elevation": 0,
     "lat": 59.87207,
     "lng": 10.51637,
     "congested": false
   },
   {
     "distance": 6,
-    "elevation": 8.270572662353516,
+    "elevation": 0,
     "lat": 59.8722,
     "lng": 10.51622,
     "congested": false
   },
   {
     "distance": 7,
-    "elevation": 6.183897018432617,
+    "elevation": 0,
     "lat": 59.87239,
     "lng": 10.51595,
     "congested": false
   },
   {
     "distance": 8,
-    "elevation": 4.257710933685303,
+    "elevation": 0,
     "lat": 59.87254,
     "lng": 10.51559,
     "congested": false
   },
   {
     "distance": 9,
-    "elevation": 4.33716344833374,
+    "elevation": 0,
     "lat": 59.87264,
     "lng": 10.51526,
     "congested": false
   },
   {
     "distance": 10,
-    "elevation": 3.899318695068359,
+    "elevation": 0,
     "lat": 59.8727,
     "lng": 10.51478,
     "congested": false
   },
   {
     "distance": 11,
-    "elevation": 5.080782890319824,
+    "elevation": 0,
     "lat": 59.87279,
     "lng": 10.5126,
     "congested": false
   },
   {
     "distance": 12,
-    "elevation": 7.060900688171387,
+    "elevation": 0,
     "lat": 59.87276,
     "lng": 10.51204,
     "congested": false
   },
   {
     "distance": 13,
-    "elevation": 10.25962448120117,
+    "elevation": 0,
     "lat": 59.87263,
     "lng": 10.51125,
     "congested": false
   },
   {
     "distance": 14,
-    "elevation": 11.25915241241455,
+    "elevation": 0,
     "lat": 59.87248,
     "lng": 10.51056,
     "congested": false
   },
   {
     "distance": 15,
-    "elevation": 11.93381977081299,
+    "elevation": 0,
     "lat": 59.87245,
     "lng": 10.51025,
     "congested": false
   },
   {
     "distance": 16,
-    "elevation": 13.01701354980469,
+    "elevation": 0,
     "lat": 59.8725,
     "lng": 10.51001,
     "congested": false
   },
   {
     "distance": 17,
-    "elevation": 14.3376407623291,
+    "elevation": 0,
     "lat": 59.8726,
     "lng": 10.50987,
     "congested": false
   },
   {
     "distance": 18,
-    "elevation": 15.88378715515137,
+    "elevation": 0,
     "lat": 59.87285,
     "lng": 10.5098,
     "congested": false
   },
   {
     "distance": 19,
-    "elevation": 15.06912612915039,
+    "elevation": 0,
     "lat": 59.87313,
     "lng": 10.5097,
     "congested": false
   },
   {
     "distance": 20,
-    "elevation": 15.99606132507324,
+    "elevation": 0,
     "lat": 59.87341,
     "lng": 10.5095,
     "congested": false
   },
   {
     "distance": 21,
-    "elevation": 14.64519119262695,
+    "elevation": 0,
     "lat": 59.87364,
     "lng": 10.50921,
     "congested": false
   },
   {
     "distance": 22,
-    "elevation": 18.39924240112305,
+    "elevation": 0,
     "lat": 59.87395,
     "lng": 10.50856,
     "congested": false
   },
   {
     "distance": 23,
-    "elevation": 15.78157043457031,
+    "elevation": 0,
     "lat": 59.87425,
     "lng": 10.50787,
     "congested": false
   },
   {
     "distance": 24,
-    "elevation": 15.57742786407471,
+    "elevation": 0,
     "lat": 59.87426,
     "lng": 10.50785,
     "congested": false
   },
   {
     "distance": 25,
-    "elevation": 12.84351444244385,
+    "elevation": 0,
     "lat": 59.87436,
     "lng": 10.50751,
     "congested": false
   },
   {
     "distance": 26,
-    "elevation": 13.93889236450195,
+    "elevation": 0,
     "lat": 59.87444,
     "lng": 10.50653,
     "congested": false
   },
   {
     "distance": 27,
-    "elevation": 12.03154850006104,
+    "elevation": 0,
     "lat": 59.87456,
     "lng": 10.5048,
     "congested": false
   },
   {
     "distance": 28,
-    "elevation": 8.121199607849121,
+    "elevation": 0,
     "lat": 59.87459,
     "lng": 10.50405,
     "congested": false
   },
   {
     "distance": 29,
-    "elevation": 7.912606239318848,
+    "elevation": 0,
     "lat": 59.87459,
     "lng": 10.50376,
     "congested": false
   },
   {
     "distance": 30,
-    "elevation": 7.821774959564209,
+    "elevation": 0,
     "lat": 59.87461,
     "lng": 10.50363,
     "congested": false
   },
   {
     "distance": 31,
-    "elevation": 8.273268699645996,
+    "elevation": 0,
     "lat": 59.87461,
     "lng": 10.5032,
     "congested": false
   },
   {
     "distance": 32,
-    "elevation": 8.384111404418945,
+    "elevation": 0,
     "lat": 59.87464,
     "lng": 10.50306,
     "congested": false
   },
   {
     "distance": 33,
-    "elevation": 8.322635650634766,
+    "elevation": 0,
     "lat": 59.87463,
     "lng": 10.50291,
     "congested": false
   },
   {
     "distance": 34,
-    "elevation": 8.282967567443848,
+    "elevation": 0,
     "lat": 59.87456,
     "lng": 10.50282,
     "congested": false
   },
   {
     "distance": 35,
-    "elevation": 7.711424827575684,
+    "elevation": 0,
     "lat": 59.87449,
     "lng": 10.50283,
     "congested": false
   },
   {
     "distance": 36,
-    "elevation": 7.420303821563721,
+    "elevation": 0,
     "lat": 59.87443,
     "lng": 10.50297,
     "congested": false
   },
   {
     "distance": 37,
-    "elevation": 7.488458156585693,
+    "elevation": 0,
     "lat": 59.87444,
     "lng": 10.50313,
     "congested": false
   },
   {
     "distance": 38,
-    "elevation": 7.785193920135498,
+    "elevation": 0,
     "lat": 59.8745,
     "lng": 10.50323,
     "congested": false
   },
   {
     "distance": 39,
-    "elevation": 8.087143898010254,
+    "elevation": 0,
     "lat": 59.87455,
     "lng": 10.50324,
     "congested": false,
