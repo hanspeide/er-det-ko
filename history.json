@@ -8778,5 +8778,10 @@
     "timestamp": "2025-04-29 09:08",
     "durationMinutes": 11,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-04-29 09:10",
+    "durationMinutes": 8,
+    "staticMinutes": 2
   }
 ]
