@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>Neskøa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +16,20 @@
   ></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="083645ab-793f-44ff-a9ec-146241d63af6"></script>
   <style>
+    :root {
+      --background-color: #ffffff;
+      --text-color: #000000;
+      --muted-text-color: #808080;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background-color: #121212;
+        --text-color: #ffffff;
+        --muted-text-color: #a0a0a0;
+      }
+    }
+
     body {
       font-family: 'Space Grotesk', sans-serif;
       height: 100vh;
@@ -26,6 +41,8 @@
       align-items: center;
       text-align: center;
       box-sizing: border-box;
+      background-color: var(--background-color);
+      color: var(--text-color);
     }
     
     @media (max-width: 480px) {
@@ -49,7 +66,7 @@
       margin-top: 10px;
       font-size: 12px;
       font-family: 'Space Mono', monospace;
-      color: gray;
+      color: var(--muted-text-color);
       max-width: 90%;
     }
     
@@ -57,7 +74,7 @@
       margin-top: 40px;
       font-size: 12px;
       font-family: 'Space Mono', monospace;
-      color: gray;
+      color: var(--muted-text-color);
       max-width: 90%;
     }
 
@@ -96,18 +113,26 @@
       const timeEl = document.querySelector('.time');
       const updatedEl = document.querySelector('.updated');
 
+      // Define colors as variables to be consistent in both themes
+      const STATUS_COLORS = {
+        stopped: "#FF0000", // Red
+        heavyTraffic: "#FF8000", // Orange
+        lightTraffic: "#FFD700", // Yellow
+        noTraffic: "#008800" // Medium-dark Green
+      };
+
       if (data.durationMinutes > 20) {
         statusEl.textContent = "🤬 Stillestående";
-        statusEl.style.color = "#FF0000"; // Red
+        statusEl.style.color = STATUS_COLORS.stopped;
       } else if (data.durationMinutes > 10) {
         statusEl.textContent = "🤬 Kø!";
-        statusEl.style.color = "#FF8000"; // Orange
+        statusEl.style.color = STATUS_COLORS.heavyTraffic;
       } else if (data.durationMinutes >= 5) {
         statusEl.textContent = "🐌 Litt kø";
-        statusEl.style.color = "#FFD700"; // Yellow
+        statusEl.style.color = STATUS_COLORS.lightTraffic;
       } else {
         statusEl.textContent = "🏎️ Ingen kø";
-        statusEl.style.color = "#008800"; // Medium-dark Green
+        statusEl.style.color = STATUS_COLORS.noTraffic;
       }
 
       timeEl.textContent = `${data.durationMinutes} minutter fra Kiwi til rundkjøringen`;
