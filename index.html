@@ -3,51 +3,72 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>nes-kø-ya</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neskøa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script
+    async
+    type="text/javascript"
+    src="https://checkout.vipps.no/checkout-button/v1/vipps-checkout-button.js"
+  ></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="083645ab-793f-44ff-a9ec-146241d63af6"></script>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       height: 100vh;
       margin: 0;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+      box-sizing: border-box;
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 30px 20px;
+      }
     }
 
     .status {
-      font-size: 2em;
+      font-size: clamp(1.5em, 6vw, 2.5em);
       margin-top: 20px;
     }
 
     .time {
-      font-size: 1.2em;
+      font-size: clamp(1em, 3.5vw, 1.3em);
+      margin-top: 16px;
+      max-width: 90%;
+    }
+
+    .updated {
       margin-top: 10px;
-    }
-
-    .updated,
-    .note {
-      margin-top: 30px;
-      font-size: 0.9em;
+      font-size: 12px;
+      font-family: 'Space Mono', monospace;
       color: gray;
+      max-width: 90%;
     }
-
-    canvas {
+    
+    .note {
       margin-top: 40px;
-      width: 100%;
-      max-width: 400px;
-      max-height: 200px;
+      font-size: 12px;
+      font-family: 'Space Mono', monospace;
+      color: gray;
+      max-width: 90%;
     }
 
-    .coffee-button {
+    .vipps-button {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 1000;
+      width: auto;
+      max-width: 90%;
     }
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -59,7 +80,6 @@
 
   <div class="status">Henter data...</div>
   <div class="time"></div>
-  <canvas id="elevationChart" style="margin-top: 40px; width: 100%; max-width: 400px; height: 80px;"></canvas>
   <div class="updated"></div>
   <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
 
@@ -76,104 +96,43 @@
       const timeEl = document.querySelector('.time');
       const updatedEl = document.querySelector('.updated');
 
-      if (data.durationMinutes > data.staticMinutes + 2) {
+      if (data.durationMinutes > 20) {
+        statusEl.textContent = "🤬 Stillestående";
+        statusEl.style.color = "#FF0000"; // Red
+      } else if (data.durationMinutes > 10) {
         statusEl.textContent = "🤬 Kø!";
+        statusEl.style.color = "#FF8000"; // Orange
+      } else if (data.durationMinutes >= 5) {
+        statusEl.textContent = "🐌 Litt kø";
+        statusEl.style.color = "#FFD700"; // Yellow
       } else {
         statusEl.textContent = "🏎️ Ingen kø";
+        statusEl.style.color = "#008800"; // Medium-dark Green
       }
 
       timeEl.textContent = `${data.durationMinutes} minutter fra Kiwi til rundkjøringen`;
       updatedEl.textContent = `Sist oppdatert: ${data.updated}`;
     }
 
-    async function loadPathData() {
-      const res = await fetch('/pathData.json');
-      if (!res.ok) return;
-
-      const data = await res.json();
-      const ctx = document.getElementById('elevationChart').getContext('2d');
-
-      const flatLine = data.map(() => 1);
-      const segmentColors = data.map(p => p.congested ? 'red' : 'green');
-
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: data.map((_, i) => i),
-          datasets: [{
-            data: flatLine,
-            borderWidth: 6,
-            pointRadius: 0,
-            fill: false,
-            tension: 0,
-            segment: {
-              borderColor: ctx => segmentColors[ctx.p1DataIndex] || 'gray'
-            }
-          }]
-        },
-        options: {
-          responsive: true,
-          layout: {
-            padding: { left: 20, right: 20 }
-          },
-          plugins: {
-            legend: { display: false },
-            tooltip: { enabled: false },
-            annotation: {
-              annotations: [
-                {
-                  type: 'label',
-                  xValue: 0,
-                  yValue: 1,
-                  content: 'Kiwi',
-                  font: {
-                    size: 11,
-                    weight: 'bold'
-                  },
-                  color: '#000',
-                  xAdjust: 10,
-                  yAdjust: -15,
-                  callout: { display: true, side: 'right' }
-                },
-                {
-                  type: 'label',
-                  xValue: data.length - 1,
-                  yValue: 1,
-                  content: 'Rundkjøringen',
-                  font: {
-                    size: 11,
-                    weight: 'bold'
-                  },
-                  color: '#000',
-                  xAdjust: -40,
-                  yAdjust: -15,
-                  callout: { display: true, side: 'left' }
-                }
-              ]
-            }
-          },
-          scales: {
-            x: { display: false },
-            y: {
-              display: false,
-              min: 0.8,
-              max: 1.2
-            }
-          }
-        }
-      });
-    }
-
-    // ✅ Register the plugin and kick off loading
-    Chart.register(window['chartjs-plugin-annotation']);
+    // Kick off loading
     loadTraffic();
-    loadPathData();
   </script>
 
-  <a href="https://www.buymeacoffee.com/hpeide" target="_blank" rel="noopener" class="coffee-button">
-    <img
-      src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&name=bmc-button&slug=hpeide&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
-      alt="Buy me a coffee" />
+  <a href="https://qr.vipps.no/box/47454e97-622b-4d1a-a881-d2a841cde8ce/pay-in" 
+     target="_blank" 
+     rel="noopener" 
+     class="vipps-button"
+     onclick="umami.track('vipps-donation-click')">
+    <vipps-mobilepay-button
+      type="button"
+      brand="vipps"
+      language="no"
+      variant="primary"
+      rounded="true"
+      verb="donate"
+      stretched="false"
+      branded="true"
+      loading="false"></vipps-mobilepay-button>
   </a>
 
 </body>
