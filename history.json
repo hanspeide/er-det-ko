@@ -24513,5 +24513,10 @@
     "timestamp": "2025-05-15 08:28",
     "durationMinutes": 11,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-05-15 08:30",
+    "durationMinutes": 11,
+    "staticMinutes": 2
   }
 ]
