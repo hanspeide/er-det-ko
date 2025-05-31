@@ -40068,5 +40068,10 @@
     "timestamp": "2025-05-31 08:00",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-05-31 08:10",
+    "durationMinutes": 4,
+    "staticMinutes": 2
   }
 ]
