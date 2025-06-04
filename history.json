@@ -44188,5 +44188,10 @@
     "timestamp": "2025-06-04 13:30",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-04 13:40",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
