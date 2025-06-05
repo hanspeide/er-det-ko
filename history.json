@@ -45168,5 +45168,10 @@
     "timestamp": "2025-06-05 10:10",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-05 10:20",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
