@@ -49698,5 +49698,10 @@
     "timestamp": "2025-06-10 09:02",
     "durationMinutes": 6,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-10 09:04",
+    "durationMinutes": 6,
+    "staticMinutes": 2
   }
 ]
