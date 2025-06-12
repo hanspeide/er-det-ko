@@ -52148,5 +52148,10 @@
     "timestamp": "2025-06-12 14:50",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-12 15:00",
+    "durationMinutes": 5,
+    "staticMinutes": 2
   }
 ]
