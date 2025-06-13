@@ -52543,5 +52543,10 @@
     "timestamp": "2025-06-13 04:00",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-13 04:10",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
