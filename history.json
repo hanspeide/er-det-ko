@@ -4008,5 +4008,10 @@
     "timestamp": "2025-06-19 21:10",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-19 21:20",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
