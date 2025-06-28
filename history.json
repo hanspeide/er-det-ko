@@ -12358,5 +12358,10 @@
     "timestamp": "2025-06-28 11:50",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-06-28 12:00",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
