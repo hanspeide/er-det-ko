@@ -42013,5 +42013,10 @@
     "timestamp": "2025-07-29 04:50",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-07-29 05:00",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
