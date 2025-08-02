@@ -46413,5 +46413,10 @@
     "timestamp": "2025-08-02 07:30",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-02 07:40",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
