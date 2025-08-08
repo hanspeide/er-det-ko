@@ -52303,5 +52303,10 @@
     "timestamp": "2025-08-08 08:02",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-08 08:04",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
