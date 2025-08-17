@@ -63,5 +63,10 @@
     "timestamp": "2025-08-17 23:40",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-17 23:50",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
