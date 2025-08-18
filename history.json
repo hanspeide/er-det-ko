@@ -473,5 +473,10 @@
     "timestamp": "2025-08-18 08:16",
     "durationMinutes": 5,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-18 08:18",
+    "durationMinutes": 5,
+    "staticMinutes": 2
   }
 ]
