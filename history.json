@@ -1513,5 +1513,10 @@
     "timestamp": "2025-08-19 08:02",
     "durationMinutes": 20,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-19 08:04",
+    "durationMinutes": 21,
+    "staticMinutes": 2
   }
 ]
