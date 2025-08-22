@@ -5328,5 +5328,10 @@
     "timestamp": "2025-08-22 19:40",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-22 19:50",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
