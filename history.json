@@ -12118,5 +12118,10 @@
     "timestamp": "2025-08-29 18:00",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-08-29 18:10",
+    "durationMinutes": 4,
+    "staticMinutes": 2
   }
 ]
