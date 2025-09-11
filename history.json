@@ -24323,5 +24323,10 @@
     "timestamp": "2025-09-11 08:58",
     "durationMinutes": 3,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-09-11 09:00",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
