@@ -101,8 +101,11 @@
   <div class="note">Oppdateres hvert 2. minutt på ukedager fra kl. 07:00 til 10:00, ellers hvert 10. minutt</div>
 
   <script>
-    async function loadTraffic() {
-      const res = await fetch('/traffic.json');
+    async function loadTraffic() {    
+      const res = await fetch(`/traffic.json?t=${Date.now()}`, {
+        cache: 'no-cache'
+      });
+
       if (!res.ok) {
         document.querySelector('.status').textContent = "😭 Klarte ikke hente data.";
         return;
