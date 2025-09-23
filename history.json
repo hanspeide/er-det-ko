@@ -1988,5 +1988,10 @@
     "timestamp": "2025-09-23 09:24",
     "durationMinutes": 3,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-09-23 09:26",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
