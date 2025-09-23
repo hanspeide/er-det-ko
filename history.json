@@ -1953,5 +1953,10 @@
     "timestamp": "2025-09-23 09:10",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-09-23 09:12",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
