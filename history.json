@@ -6108,5 +6108,10 @@
     "timestamp": "2025-09-27 12:30",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-09-27 12:40",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
