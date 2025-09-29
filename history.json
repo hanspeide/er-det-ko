@@ -8068,5 +8068,10 @@
     "timestamp": "2025-09-29 17:50",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-09-29 18:00",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
