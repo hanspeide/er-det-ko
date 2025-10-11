@@ -19833,5 +19833,10 @@
     "timestamp": "2025-10-11 14:00",
     "durationMinutes": 3,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-10-11 14:10",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
