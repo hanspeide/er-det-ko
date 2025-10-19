@@ -27563,5 +27563,10 @@
     "timestamp": "2025-10-19 19:40",
     "durationMinutes": 3,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-10-19 19:50",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
