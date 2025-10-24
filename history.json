@@ -33008,5 +33008,10 @@
     "timestamp": "2025-10-24 21:10",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-10-24 21:20",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
