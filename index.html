@@ -124,10 +124,10 @@
         noTraffic: "#008800" // Medium-dark Green
       };
 
-      if (data.durationMinutes > 20) {
+      if (data.durationMinutes >= 20) {
         statusEl.textContent = "🤬 Stillestående";
         statusEl.style.color = STATUS_COLORS.stopped;
-      } else if (data.durationMinutes > 10) {
+      } else if (data.durationMinutes >= 10) {
         statusEl.textContent = "🤬 Kø!";
         statusEl.style.color = STATUS_COLORS.heavyTraffic;
       } else if (data.durationMinutes >= 5) {
@@ -145,15 +145,15 @@
     // Kick off loading
     loadTraffic();
     
-    // Auto-refresh every minute
-    setInterval(loadTraffic, 60000);
+    // Auto-refresh every 2 minutes to match backend update frequency
+    setInterval(loadTraffic, 120000);
   </script>
 
   <a href="https://qr.vipps.no/box/47454e97-622b-4d1a-a881-d2a841cde8ce/pay-in" 
      target="_blank" 
      rel="noopener" 
      class="vipps-button"
-     onclick="umami.track('vipps-donation-click')">
+     onclick="umami?.track('vipps-donation-click')">
     <vipps-mobilepay-button
       type="button"
       brand="vipps"
