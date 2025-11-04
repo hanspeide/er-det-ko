@@ -42833,5 +42833,10 @@
     "timestamp": "2025-11-04 08:08",
     "durationMinutes": 5,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-11-04 08:10",
+    "durationMinutes": 4,
+    "staticMinutes": 2
   }
 ]
