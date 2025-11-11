@@ -49653,5 +49653,10 @@
     "timestamp": "2025-11-11 08:00",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-11-11 08:02",
+    "durationMinutes": 5,
+    "staticMinutes": 2
   }
 ]
