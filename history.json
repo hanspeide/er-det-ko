@@ -51218,5 +51218,10 @@
     "timestamp": "2025-11-12 16:10",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-11-12 16:20",
+    "durationMinutes": 4,
+    "staticMinutes": 2
   }
 ]
