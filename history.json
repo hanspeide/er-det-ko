@@ -1958,5 +1958,10 @@
     "timestamp": "2025-11-19 13:40",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-11-19 13:50",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
