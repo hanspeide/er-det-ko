@@ -8023,5 +8023,10 @@
     "timestamp": "2025-11-26 00:00",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-11-26 00:10",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
