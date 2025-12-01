@@ -13133,5 +13133,10 @@
     "timestamp": "2025-12-01 08:28",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2025-12-01 08:30",
+    "durationMinutes": 5,
+    "staticMinutes": 2
   }
 ]
