@@ -43618,5 +43618,10 @@
     "timestamp": "2026-01-01 08:34",
     "durationMinutes": 4,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-01-01 08:36",
+    "durationMinutes": 4,
+    "staticMinutes": 2
   }
 ]
