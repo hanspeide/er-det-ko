@@ -52668,5 +52668,10 @@
     "timestamp": "2026-01-10 16:30",
     "durationMinutes": 3,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-01-10 16:40",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
