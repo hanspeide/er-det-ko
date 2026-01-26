@@ -1738,5 +1738,10 @@
     "timestamp": "2026-01-26 19:30",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-01-26 19:40",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
