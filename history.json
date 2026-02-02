@@ -7998,5 +7998,10 @@
     "timestamp": "2026-02-02 08:02",
     "durationMinutes": 9,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-02-02 08:04",
+    "durationMinutes": 8,
+    "staticMinutes": 2
   }
 ]
