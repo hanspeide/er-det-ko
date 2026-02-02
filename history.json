@@ -8008,5 +8008,10 @@
     "timestamp": "2026-02-02 08:06",
     "durationMinutes": 9,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-02-02 08:08",
+    "durationMinutes": 8,
+    "staticMinutes": 2
   }
 ]
