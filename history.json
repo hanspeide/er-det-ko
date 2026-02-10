@@ -16308,5 +16308,10 @@
     "timestamp": "2026-02-10 14:40",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-02-10 14:50",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
