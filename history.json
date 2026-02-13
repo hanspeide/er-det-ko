@@ -19843,5 +19843,10 @@
     "timestamp": "2026-02-14 00:30",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-02-14 00:40",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
