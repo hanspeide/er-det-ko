@@ -23833,5 +23833,10 @@
     "timestamp": "2026-02-18 08:18",
     "durationMinutes": 3,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-02-18 08:20",
+    "durationMinutes": 3,
+    "staticMinutes": 2
   }
 ]
