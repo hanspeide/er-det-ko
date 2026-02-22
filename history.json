@@ -27458,5 +27458,10 @@
     "timestamp": "2026-02-22 02:40",
     "durationMinutes": 2,
     "staticMinutes": 2
+  },
+  {
+    "timestamp": "2026-02-22 02:50",
+    "durationMinutes": 2,
+    "staticMinutes": 2
   }
 ]
